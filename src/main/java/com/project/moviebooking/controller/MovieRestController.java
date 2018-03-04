@@ -246,4 +246,24 @@ import app.repository.BookRepository;
         response.put("book", bookRepository.save(book));
         return response;
     }
+
+    // DELETE existing movie
+    @RequestMapping(method = RequestMethod.DELETE, value="/{bookId}")
+    public Map<String, String> deleteBook(@PathVariable("bookId") String bookId){
+        bookRepository.delete(bookId);
+        Map<String, String> response = new HashMap<String, String>();
+        response.put("message", "Book deleted successfully");
+
+        return response;
+    }
+
+    // GET ALL MOVIES TO DISPLAY
+    @RequestMapping(method = RequestMethod.GET)
+    public Map<String, Object> getAllBooks(){
+        List<Book> books = bookRepository.findAll();
+        Map<String, Object> response = new LinkedHashMap<String, Object>();
+        response.put("totalBooks", books.size());
+        response.put("books", books);
+        return response;
+    }
 }
