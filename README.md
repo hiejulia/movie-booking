@@ -1,9 +1,18 @@
 # movie-booking
 
+## Project overview 
++ Simle content management and media sharing tool
+
+
+
 ## Tech stack 
-+ Spring boot 
++ Spring boot
++ Restful API 
+    + CORS
+    + Spring data with mongoDB repositories  
 + MongoDB 
 + Docker - Docker compose
+
 
 
 
