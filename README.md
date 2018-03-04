@@ -9,9 +9,13 @@
 + Spring boot
 + Restful API 
     + CORS
-    + Spring data with mongoDB repositories  
+    + Spring data with mongoDB repositories
+    + Spring security   
 + MongoDB 
 + Docker - Docker compose
++ Testing : JUnit/Mockito/MockMVC/AssertJ/Hamcrest 
++ Java 8 
+
 
 
 
