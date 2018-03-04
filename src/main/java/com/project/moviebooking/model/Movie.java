@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,11 +17,13 @@ public class Movie {
     private ObjectId id;
 
     @Indexed(name = "name",unique = true)// add index when search with movie name
+    @NotNull
     private String name;
 
     @Field("description")
     private String description;
 
+    @NotNull
     private Double price;
 
     private String imageUrl;
