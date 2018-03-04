@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  springboot: # the name of our spring boot service
+    build: . # build own image from the current folder
+    # image: registry.gitlab.com/idgst/springboot-mongo-demo:latest
+    restart: always # restart policy
+    container_name: springboot # define the custom container name
+    ports:
+      - 8182:8080  # expose port
+    working_dir: /opt/app   # set working dir for any run cmd, entrypoint , copy and add command
+    depends_on: # our spring boot container will depend on mongo container and will be started after mongo
+      - mongo
+
+  mongo: # name of mongo service
+    image: mongo
+    container_name: springboot-mongo
+#    ports:  # for demo/debug purpose only
+#      - 27018:27017
+    volumes:  # mount host path or named volumes, means that our host/local folder will be mounted as /data/db inside our running container 
+      - $HOME/data/springboot-mongo-data:/data/db
+      - $HOME/data/springboot-mongo-bkp:/data/bkp
+    restart: always
