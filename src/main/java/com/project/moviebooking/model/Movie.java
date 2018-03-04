@@ -7,13 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Document
-
+@Document(collection = "movie")
 public class Movie {
     @Id
     private ObjectId id;
 
-    @Indexed(name = "name")// add index when search with movie name
+    @Indexed(name = "name",unique = true)// add index when search with movie name
     private String name;
 
     private String description;
