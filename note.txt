@@ -1,6 +1,25 @@
+Base - big project
+
+
+
+
+
+
+
+
 Ref:
 Docker - docker- composer : https://dev-pages.info/how-to-run-spring-boot-and-mongodb-in-docker-using-docker-compose/
 
 
 
 Add security: https://github.com/woemler/spring-blog
+
+
+
+
+Spring boot + MongoDB
+1. Github project
+
+    2. https://github.com/johnnybionic/coffee-shop
+    3. https://github.com/dpchandra/ShoppingCartAngular2SpringBootMongoDB
+    4. https://github.com/ashishn-assignments/igt-assignment

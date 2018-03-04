@@ -2,17 +2,21 @@ package com.project.moviebooking.service;
 
 
 
+import com.project.moviebooking.model.Movie;
+
 import java.util.List;
 
 public interface MovieService {
 
-    List<Product> listAll();
+    List<Movie> listAll();
 
-    Product getById(String id);
+    Movie getById(String id);
 
-    Product saveOrUpdate(Product product);
+    Movie saveOrUpdate(Product product);
 
     void delete(String id);
 
-    Product saveOrUpdateProductForm(ProductForm productForm);
+    Movie saveOrUpdateProductForm(ProductForm productForm);
+
+
 }

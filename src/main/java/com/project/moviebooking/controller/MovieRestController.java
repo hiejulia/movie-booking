@@ -1,6 +1,7 @@
 package com.project.moviebooking.controller;
 
 import com.project.moviebooking.model.Movie;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/movies")
+@CrossOrigin("*")
 public class MovieRestController {
     // autowired : repo, service
 
@@ -31,102 +33,15 @@ public class MovieRestController {
     // GET /{movieId} : get one movie by id
     @RequestMapping(method = RequestMethod.GET, value="/{movieId}")
     public Movie getMovieDetails(@PathVariable("movieId") String movieId){
-//        return bookRepository.findOne(bookId);
+//        return bookRepository.findOne(bookId).map(m -> ResponseEntity.ok().body(m)).orElse(ResponseEntity.notFound().build());
         return null;
 
     }
 
 
-    // update movie
 
-import org.springframework.data.annotation.Id;
 
-    public class Book {
 
-        @Id
-        private String id;
-        private String name;
-        private String isbn;
-        private String author;
-        private int pages;
-
-        public Book(){}
-
-        public Book(String name, String isbn, String author, int pages){
-            this.name = name;
-            this.isbn = isbn;
-            this.author = author;
-            this.pages = pages;
-        }
-
-        public String getId() {
-            return id;
-        }
-        public void setId(String id) {
-            this.id = id;
-        }
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public String getIsbn() {
-            return isbn;
-        }
-        public void setIsbn(String isbn) {
-            this.isbn = isbn;
-        }
-        public String getAuthor() {
-            return author;
-        }
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-        public int getPages() {
-            return pages;
-        }
-        public void setPages(int pages) {
-            this.pages = pages;
-        }
-    }
-
-    Lets add Repository class to interact with the DB
-
-            Recommended from our users: Dynamic Network Monitoring from WhatsUp Gold from IPSwitch. Free Download
-package app.repository;
-
-import app.model.Book;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-    public interface BookRepository extends MongoRepository<Book, String>{
-    }
-    The MongoRepository provides basic CRUD operation methods and also an API to find all documents in the collection.
-
-    Implementing Create and Get Details API
-    Lets implement our controller. First is the API to create new book and also to get the details of a given book:
-
-            package app.controller;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import app.model.Book;
-import app.repository.BookRepository;
-
-    @RestController
-    @RequestMapping("/book")
-    public class BookController {
-
-        @Autowired
-        private BookRepository bookRepository;
 
         @RequestMapping(method = RequestMethod.POST)
         public Map<String, Object> createBook(@RequestBody Map<String, Object> bookMap){
@@ -150,7 +65,7 @@ import app.repository.BookRepository;
 
     @RequestMapping(method = RequestMethod.PUT, value="/{bookId}")
     public Map<String, Object> editBook(@PathVariable("bookId") String bookId,
-                                        @RequestBody Map<String, Object> bookMap){
+                                        @Valid @RequestBody Map<String, Object> bookMap){
         Book book = new Book(bookMap.get("name").toString(),
                 bookMap.get("isbn").toString(),
                 bookMap.get("author").toString(),
@@ -174,12 +89,39 @@ import app.repository.BookRepository;
     }
 
     // GET ALL MOVIES TO DISPLAY
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public Map<String, Object> getAllBooks(){
-        List<Book> books = bookRepository.findAll();
+
+        // sort :
+        Sort sortByCreatedAtDesc = new Sort(Sort.Direction.DESC, "createdAt");
+
+        List<Book> books = bookRepository.findAll(sortByCreatedAtDesc);
         Map<String, Object> response = new LinkedHashMap<String, Object>();
         response.put("totalBooks", books.size());
         response.put("books", books);
         return response;
     }
 }
+
+
+//
+//@PutMapping(value="/todos/{id}")
+//public ResponseEntity<Todo> updateTodo(@PathVariable("id") String id,
+//@Valid @RequestBody Todo todo) {
+//        return todoRepository.findById(id)
+//        .map(todoData -> {
+//        todoData.setTitle(todo.getTitle());
+//        todoData.setCompleted(todo.getCompleted());
+//        Todo updatedTodo = todoRepository.save(todoData);
+//        return ResponseEntity.ok().body(updatedTodo);
+//        }).orElse(ResponseEntity.notFound().build());
+//        }
+//
+//@DeleteMapping(value="/todos/{id}")
+//public ResponseEntity<?> deleteTodo(@PathVariable("id") String id) {
+//        return todoRepository.findById(id)
+//        .map(todo -> {
+//        todoRepository.deleteById(id);
+//        return ResponseEntity.ok().build();
+//        }).orElse(ResponseEntity.notFound().build());
+//        }
