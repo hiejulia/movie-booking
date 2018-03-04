@@ -17,7 +17,7 @@ services:
     container_name: springboot-mongo
 #    ports:  # for demo/debug purpose only
 #      - 27018:27017
-    volumes:  # mount host path or named volumes, means that our host/local folder will be mounted as /data/db inside our running container 
+    volumes:  # mount host path or named volumes, means that our host/local folder will be mounted as /data/db inside our running container
       - $HOME/data/springboot-mongo-data:/data/db
       - $HOME/data/springboot-mongo-bkp:/data/bkp
     restart: always
