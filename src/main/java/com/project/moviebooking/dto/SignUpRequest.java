@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 @JsonDeserialize
 public class SignUpRequest {
     private String phone;
+
     private String countryCode;
+
     private String email;
+
+
+
 }
