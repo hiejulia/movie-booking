@@ -55,30 +55,5 @@ public class CategoryServiceTest {
 
     // Test case: get all and sort
 
-    @Test
-    public void test_getAllAndSort() {
-        Apartment apartment1 = new Apartment();
-        apartment1.setNo(1L);
-        apartment1.setName("A 1");
-        apartment1.setAddress("ADDR 1");
 
-        Apartment apartment2 = new Apartment();
-        apartment2.setNo(2L);
-        apartment2.setName("A 2");
-        apartment2.setAddress("ADDR 2");
-
-        Apartment apartment3 = new Apartment();
-        apartment3.setNo(3L);
-        apartment3.setName("A 3");
-        apartment3.setAddress("ADDR 3");
-
-        apartmentRepository.save(Arrays.asList(apartment1, apartment2, apartment3));
-
-        Page<Apartment> pageResult = apartmentService.getAllAndSortByNo(0, 10, "DESC", "no");
-        List<Apartment> listResult = pageResult.getContent();
-
-        Assert.assertEquals(apartment3.getNo(), listResult.get(0).getNo());
-        Assert.assertEquals(apartment2.getNo(), listResult.get(1).getNo());
-        Assert.assertEquals(apartment1.getNo(), listResult.get(2).getNo());
-    }
 }
