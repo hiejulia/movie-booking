@@ -7,5 +7,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface UserRepository extends MongoRepository<String,User> , UserRepositoryCustom{
+    // Find user by first name
+    User findByFirstName(String firstname);
+
 
 }

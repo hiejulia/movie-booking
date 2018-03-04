@@ -1,6 +1,7 @@
 package com.project.moviebooking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.project.moviebooking.repository.order.ShoppingCart;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -11,12 +12,14 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Document(collection = "movie")
 @JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
-public class Movie {
+public class Movie implements Serializable {
     @Id
     private ObjectId id;
 
@@ -36,14 +39,21 @@ public class Movie {
 
     // catagory
 
-    @DBRef
-    private Category category;
 
     @Field("published")
     private LocalDate publicationDate;
 
     @Field("createdAt")
     private LocalDate createdAt;
+
+
+    // db ref
+    @DBRef
+    private Category category;
+
+    // shopping cart
+    @DBRef
+    private Set<ShoppingCart> shoppingCartSet;
 
 
 }

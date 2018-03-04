@@ -11,4 +11,13 @@ import java.util.List;
 public interface CustomerRepository extends MongoRepository<Customer,String>{
     // search for customer by customer email
     List<Customer> findByEmail(@Param("email") String email);
+
+
+    Customer save(Customer customer) ;
+
+    List<Customer> findByFirstName(String firstName) ;
+
+//    Customer findById(String id) ;
+
+    void deleteCustomerById(String id);
 }

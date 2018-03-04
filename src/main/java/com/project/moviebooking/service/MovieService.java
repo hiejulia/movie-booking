@@ -6,6 +6,7 @@ import com.project.moviebooking.model.Movie;
 
 import java.util.List;
 
+
 public interface MovieService {
 
     List<Movie> listAll();

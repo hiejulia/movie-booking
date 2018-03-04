@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/v1/categories")
 public class CategoryRestController {
 
+    private static final int MAX_DISTANCE = 2000;
+
     private final CategoryService categoryService;
+
 
     @Autowired
     public CategoryRestController(CategoryService categoryService){

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -80,7 +81,7 @@ public class MovieRestController {
 
     // DELETE existing movie
     @RequestMapping(method = RequestMethod.DELETE, value="/{bookId}")
-    public Map<String, String> deleteBook(@PathVariable("bookId") String bookId){
+    public Map<String, String> deleteBook(final @PathVariable("bookId") String bookId){
         bookRepository.delete(bookId);
         Map<String, String> response = new HashMap<String, String>();
         response.put("message", "Book deleted successfully");

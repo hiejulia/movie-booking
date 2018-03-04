@@ -10,16 +10,81 @@ Base - big project
 Ref:
 Docker - docker- composer : https://dev-pages.info/how-to-run-spring-boot-and-mongodb-in-docker-using-docker-compose/
 
-
+https://github.com/ashishn-assignments/igt-assignment
 
 Add security: https://github.com/woemler/spring-blog
+Add dao + co 3 model : https://github.com/vaibhavsehgal1/shop
+
+
++Security :https://github.com/ihr/spring-boot-mongodb + https://github.com/selakavon/spring-rest-oauth2-mongo +
 
 
 
 
-Spring boot + MongoDB
-1. Github project
+Code ref :
++ Controller
+ @RequestMapping(value = "/coffeeshop/{id}/order", method = RequestMethod.POST)
+    public ResponseEntity saveOrder(@PathVariable Long id, @RequestBody Order order) throws URISyntaxException {
 
-    2. https://github.com/johnnybionic/coffee-shop
-    3. https://github.com/dpchandra/ShoppingCartAngular2SpringBootMongoDB
-    4. https://github.com/ashishn-assignments/igt-assignment
+        order.setCoffeeShopId(id);
+
+        DBCollection orders = database.getCollection("orders");
+        JacksonDBCollection<Order, String> collection = JacksonDBCollection.wrap(orders, Order.class, String.class);
+        WriteResult<Order, String> insert = collection.insert(order);
+        if (insert == null) {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        order.setId(insert.getSavedId());
+        URI location = new URI("");
+        //location.create(order.getId());
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(location);
+
+        return new ResponseEntity<Order>(order, responseHeaders, HttpStatus.CREATED);
+    }
+
+    // /service/coffeeshop/{{coffeShopId}}/order/orderId
+    @RequestMapping("/coffeeshop/{coffeeShopId}/order/{orderId}")
+    public ResponseEntity getOrder(@PathVariable(value = "coffeeShopId") Long coffeeShopId,
+                                   @PathVariable(value = "orderId") String orderId, HttpServletRequest request)
+            throws URISyntaxException {
+        BasicDBObject query = new BasicDBObject();
+        query.put("_id", new ObjectId(orderId));
+
+        DBCollection orders = database.getCollection("orders");
+        JacksonDBCollection<Order, String> collection = JacksonDBCollection.wrap(orders, Order.class, String.class);
+        Order order = collection.findOne(query);
+
+        String url = request.getRequestURL().toString();
+        URI location = new URI(url);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(location);
+
+        return new ResponseEntity<Order>(order, responseHeaders, HttpStatus.OK);
+    }
+
+    /*
+    * Pattern required on last parameter to prevent Spring treating it as an extension e.g. .xml, .json
+     */
+    @RequestMapping("/coffeeshop/nearest/{latitude}/{longitude:.*}")
+    public ResponseEntity<String> getNearest(@PathVariable(value = "latitude") Double latitude, @PathVariable(value = "longitude") Double longitude) {
+
+        DBCollection coffeeshops = database.getCollection("coffeeshops");
+
+        DBObject one = coffeeshops.findOne(new BasicDBObject("location",
+                new BasicDBObject("$near",
+                        new BasicDBObject("$geometry",
+                                new BasicDBObject("type", "Point")
+                                        .append("coordinates", Arrays.asList(longitude, latitude)))
+                        .append("$maxDistance", MAX_DISTANCE))));
+
+        if (one == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        String json = one.toString();
+        return new ResponseEntity<String>(json, null, HttpStatus.OK);
+    }

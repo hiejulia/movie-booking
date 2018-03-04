@@ -22,5 +22,14 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     // get movie by id
     Movie getMovieById(String id);
 
+    // save new movie to database
+    Movie save(Movie movie);
+
+    // find movie by name
+    List<Movie> findByName(String name);
+
+    // delete movie
+    void deleteMovieById(String id);
+
 
 }
