@@ -22,7 +22,7 @@
 
 ## How to run 
 + Locally
-
+    + `mvn spring-boot:run`
 + Docker container 
     + `docker-compose up`
     + Attach bash to the running Mongo container 
@@ -30,6 +30,9 @@
     
     
     
+    
++ Swagger API docs 
+    + Open Swagger API doc : `localhost:8080/swagger-ui.html`
    
 
     

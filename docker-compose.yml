@@ -11,13 +11,22 @@ services:
     working_dir: /opt/app   # set working dir for any run cmd, entrypoint , copy and add command
     depends_on: # our spring boot container will depend on mongo container and will be started after mongo
       - mongo
+      - rabbitmq
+    network_mode: "host"
 
   mongo: # name of mongo service
     image: mongo
     container_name: springboot-mongo
-#    ports:  # for demo/debug purpose only
-#      - 27018:27017
+    ports:  # for demo/debug purpose only
+      - 27017:27017
     volumes:  # mount host path or named volumes, means that our host/local folder will be mounted as /data/db inside our running container
       - $HOME/data/springboot-mongo-data:/data/db
       - $HOME/data/springboot-mongo-bkp:/data/bkp
     restart: always
+
+
+  rabbitmq:
+    image: rabbitmq:3.5.3-management
+    ports:
+      - 5672:5672
+      - 15672:15672

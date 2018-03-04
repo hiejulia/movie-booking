@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/movies")
+@RequestMapping("/movies")
 public class MovieRestController {
     // autowired : repo, service
 
@@ -38,90 +38,6 @@ public class MovieRestController {
 
 
     // update movie
-    	<artifactId>springboot-rest-demo</artifactId>
-	<version>0.1</version>
-    <name>Spring Boot REST API Demo</name>
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.3.RELEASE</version>
-	</parent>
-</project>
-    spring-boot-starter-web
-    In order to build RESTful Service we would need make use of: spring web, JSON processing libraries, embedded tomcat or tomcat libraries, may be some library for validators like Hibernate validator. We might not remember all the dependencies required or might have to refer to some place to know which dependencies are required.
-
-    To solve such issues Spring Boot provides a pom already configured with the dependencies required to build a web application and that pom is called: spring-boot-starter-web. Updating our pom.xml to add it as a dependency we get:
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.javabeat</groupId>
-	<artifactId>springboot-rest-demo</artifactId>
-	<version>0.1</version>
-    <name>Spring Boot REST API Demo</name>
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.3.RELEASE</version>
-	</parent>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-	</dependencies>
-</project>
-    Similarly we have a pom: spring-boot-starter-data-mongodb which includes dependencies to mongo java driver, spring transaction, spring data for mongodb. So our final pom.xml looks like:
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.javabeat</groupId>
-	<artifactId>springboot-rest-demo</artifactId>
-	<version>0.1</version>
-    <name>Spring Boot REST API Demo</name>
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.3.RELEASE</version>
-	</parent>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-	</dependencies>
-</project>
-    Spring Boot Application
-    We need to create a main class which initializes the Spring Boot application and runs it. We also annotate the class with @SpringBootApplication. This annotation is tells the Spring application to enable autoconfiguration and component scan and also tells the Spring application that this particular class is also a configuration:
-
-            package app;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-    @SpringBootApplication
-    public class Application {
-
-        public static void main(String[] args) throws Exception {
-            SpringApplication.run(new Object[] { Application.class }, args);
-        }
-    }
-    Implementing the RESTful APIs
-    Let me create a model class to hold Book details retrieved from DB.
-
-            package app.model;
 
 import org.springframework.data.annotation.Id;
 
