@@ -4,7 +4,7 @@ package com.project.moviebooking.service;
 
 import java.util.List;
 
-public interface ProductService {
+public interface MovieService {
 
     List<Product> listAll();
 
