@@ -3,6 +3,7 @@ package com.project.moviebooking.model;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -17,7 +18,14 @@ public class Movie {
 
     private String description;
 
-    private BigDecimal price;
+    private Double price;
 
     private String imageUrl;
+
+    // catagory
+
+    @DBRef
+    private Category category;
+
+
 }
