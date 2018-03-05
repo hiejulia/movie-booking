@@ -26,10 +26,10 @@ public class CategoryServiceImpl {
     }
 
     // get all and sort by no
-    public Page<Apartment> getAllAndSortByNo(Integer page, Integer perPage, String direction, String field) {
-
-        Pageable pageable = new PageRequest(page, perPage, Sort.Direction.fromString(direction), field);
-
-        return apartmentRepository.findAll(pageable);
-    }
+//    public Page<Apartment> getAllAndSortByNo(Integer page, Integer perPage, String direction, String field) {
+//
+//        Pageable pageable = new PageRequest(page, perPage, Sort.Direction.fromString(direction), field);
+//
+//        return apartmentRepository.findAll(pageable);
+//    }
 }

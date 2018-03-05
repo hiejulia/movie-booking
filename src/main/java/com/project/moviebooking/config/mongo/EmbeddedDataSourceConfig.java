@@ -14,20 +14,20 @@ import java.io.IOException;
 
 
 
-@Configuration
-@Profile({ "dev", "default" })
-@ComponentScan(basePackages = { "com.project.moviebooking.service" })
-@EnableMongoRepositories(basePackages = "com.project.moviebooking.repository")
+//@Configuration
+//@Profile({ "dev", "default" })
+//@ComponentScan(basePackages = { "com.project.moviebooking.service" })
+//@EnableMongoRepositories(basePackages = "com.project.moviebooking.repository")
 public class EmbeddedDataSourceConfig {
 
-    @Bean(destroyMethod = "close")
-    public Mongo mongo() throws IOException {
-        return new EmbeddedMongoBuilder().build();
-    }
-
-    @Bean
-    public MongoTemplate mongoTemplate(Mongo mongo){
-        return new MongoTemplate(mongo, "blog");
-    }
+//    @Bean(destroyMethod = "close")
+//    public Mongo mongo() throws IOException {
+//        return new EmbeddedMongoBuilder().build();
+//    }
+//
+//    @Bean
+//    public MongoTemplate mongoTemplate(Mongo mongo){
+//        return new MongoTemplate(mongo, "blog");
+//    }
 
 }

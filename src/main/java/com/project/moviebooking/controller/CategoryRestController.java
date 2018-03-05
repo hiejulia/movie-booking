@@ -20,20 +20,20 @@ public class CategoryRestController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping(method= RequestMethod.POST, value = "/", headers = "Accept=application/json")
-    @ResponseBody
-    public boolean testSave(@RequestBody SignUpRequest userInfo) {
-        String phone = userInfo.getPhone();
-        String countryCode = userInfo.getCountryCode();
-        String email = userInfo.getEmail();
-
-        Account account = new Account();
-        account.setId("10000000000"); //still, for the reason of simplicity...
-        account.setPhone(phone);
-        account.setCountryCode(CountryCode.China);
-        account.setEmail(email);
-        accountService.save(account);
-        return true;
-    }
+//    @RequestMapping(method= RequestMethod.POST, value = "/", headers = "Accept=application/json")
+//    @ResponseBody
+//    public boolean testSave(@RequestBody SignUpRequest userInfo) {
+//        String phone = userInfo.getPhone();
+//        String countryCode = userInfo.getCountryCode();
+//        String email = userInfo.getEmail();
+//
+//        Account account = new Account();
+//        account.setId("10000000000"); //still, for the reason of simplicity...
+//        account.setPhone(phone);
+//        account.setCountryCode(CountryCode.China);
+//        account.setEmail(email);
+//        accountService.save(account);
+//        return true;
+//    }
 
 }

@@ -37,21 +37,21 @@ public class CategoryServiceTest {
     public void tearDown(){
         categoryRepository.deleteAll();
     }
-    @Test
-    public void test_getAll(){
-        Category category1 = new Category();
-        category1.setName("romance");
-        category1.setId("1");
-
-        Category category2 = new Category();
-        category2.setId("2");
-        category2.setName("action");
-
-        categoryRepository.save(Arrays.asList(category1,category2));
-        List<Category> result = categoryService.getAll();
-        Assert.assertEquals(2, result.size());
-
-    }
+//    @Test
+//    public void test_getAll(){
+//        Category category1 = new Category();
+//        category1.setName("romance");
+//        category1.setId("1");
+//
+//        Category category2 = new Category();
+//        category2.setId("2");
+//        category2.setName("action");
+//
+//        categoryRepository.save(Arrays.asList(category1,category2));
+//        List<Category> result = categoryService.getAll();
+//        Assert.assertEquals(2, result.size());
+//
+//    }
 
     // Test case: get all and sort
 
